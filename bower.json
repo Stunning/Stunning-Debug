@@ -1,0 +1,23 @@
+{
+  "name": "stunning-debug",
+  "version": "0.0.0",
+  "authors": [
+    "Johan Hermansson <johan@stunning.se>"
+  ],
+  "description": "A console.log wrapper and fallback.",
+  "main": "/src/stunning-debug.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "license": "MIT",
+  "homepage": "http://stunning.se",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

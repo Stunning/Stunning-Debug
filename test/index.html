@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Stunning Debug</title>
+</head>
+<body>
+	<script src="../src/stunning-debug.js"></script>
+	<script>
+		var Debug = new StunningDebug();
+
+		Debug.log('foobar', { 'foo': 'bar' });
+		Debug.warn('one warning');
+		Debug.error('error with array', [1,2,3,4]);
+		Debug.get();
+	</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "stunning-debug",
+  "version": "0.0.0",
+  "description": "A wrapper and fallback for console.log.",
+  "main": "src/stunning-debug.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Stunning/Stunning-Debug.git"
+  },
+  "author": "Johan Hermansson <johan@stunning.se>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Stunning/Stunning-Debug/issues"
+  },
+  "homepage": "https://github.com/Stunning/Stunning-Debug"
+}
