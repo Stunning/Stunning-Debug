@@ -7,12 +7,47 @@
 <body>
 	<script src="../src/stunning-debug.js"></script>
 	<script>
-		var Debug = new StunningDebug();
+		_Debug.set({
+			storage: true
+		});
 
-		Debug.log('foobar', { 'foo': 'bar' });
-		Debug.warn('one warning');
-		Debug.error('error with array', [1,2,3,4]);
-		Debug.get();
+		_Debug.log('-------------------');
+		_Debug.log('! One argument');
+		_Debug.log('-------------------');
+		_Debug.log(false);
+		_Debug.log(32);
+		_Debug.log(32.33);
+		_Debug.log({ 'foo': 'bar' });
+		_Debug.warn('warning');
+		_Debug.error([1,2,3,4,'value']);
+		_Debug.log(function() { return 'foobar'; });
+
+		_Debug.log('');
+
+		_Debug.log('-------------------');
+		_Debug.log('! Two arguments');
+		_Debug.log('-------------------');
+		
+		_Debug.set('prefix', 'Prefix:');
+
+		_Debug.log('bool', true);
+		_Debug.log('int', 32);
+		_Debug.log('float', 32.33);
+		_Debug.log('object', { 'foo': 'bar' });
+		_Debug.warn('warning');
+		_Debug.error('error array', [1,2,3,4,'value']);
+		_Debug.log('fn', function() { return 'foobar'; });
+
+		_Debug.set('prefix', '');
+
+		_Debug.log('');
+		_Debug.log('-------------------');
+		_Debug.log('! Removed prefix');
+		_Debug.log('-------------------');
+
+		var storage = _Debug.getStorage();
+
+		document.write('<pre>' + (storage ? JSON.stringify(storage, null, 2) : '') + '</pre>');
 	</script>
 </body>
 </html>

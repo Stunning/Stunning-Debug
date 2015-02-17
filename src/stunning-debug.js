@@ -7,58 +7,88 @@
 		module.exports = factory();
 	} else {
 		// Globals
-		window.StunningDebug = factory();
+		window._Debug = factory();
 	}
 }(function() {
 
-	var Debug = function(options) {
-		this.storage = [];
+	var options = {
+		prefix: null,
+		storage: false
 	};
 
-	Debug.prototype = {
-		send: function(type, args) {
-			this.store.call(this, type, args);
+	var storage = [];
+	
+	var Send = function(type, args) {
+		// Send message to storage
+		Store(type, args);
 
-			if(args[1]) {
-				console[type](args[0], args[1]);
-			} else {
-				console[type](args[0]);
+		// Clean arguments
+		args = CleanArguments( args );
+
+		// Send message to browser console
+		if(args[1]) {
+			console[type](args[0], args[1]);
+		} else {
+			console[type](args[0]);
+		}
+	};
+
+	var CleanArguments = function(args) {
+		args = args || [];
+
+		// Stringify functions
+		for(var i = 0; i < args.length; i++) {
+			switch(typeof args[i]) {
+				case 'function':
+					args[i] = args[i].toString()
+				break;
+			}
+		}
+
+		// Add prefix to arguments if provided
+		if(options.prefix && args[0] && typeof args[0] === 'string') {
+			args[0] = options.prefix + ' ' + args[0];
+		}
+
+		return args;
+	};
+
+	var Store = function(type, args) {
+		if( ! options.storage) {
+			return;
+		}
+
+		storage.push({
+			type: type,
+			arguments: args
+		});
+	};
+
+	return {
+		set: function(key, value) {
+			if(typeof key === 'object') {
+				Object.keys(key).forEach(function(opt) {
+					options[opt] = key[opt];
+				});
+
+				return;
+			}
+
+			if(options[key] !== undefined) {
+				options[key] = value;
 			}
 		},
-		store: function(type, args) {
-			this.storage.push({
-				type: type,
-				arguments: args
-			});
+		log: function() {
+			Send('log', arguments);
+		},
+		warn: function() {
+			Send('warn', arguments);
+		},
+		error: function() {
+			Send('error', arguments);
+		},
+		getStorage: function() {
+			return storage;
 		}
 	};
-
-	return function(options) {
-		
-		var debug = new Debug(options);
-
-		var api = {
-			log: function() {
-				debug.send('log', arguments);
-			},
-			warn: function() {
-				debug.send('warn', arguments);
-			},
-			error: function() {
-				debug.send('error', arguments);
-			},
-			get: function() {
-				debug.send('log', debug.storage);
-			}
-		};
-
-		// Console.log fallback
-		// TODO: Force fallback option
-		if( ! window.console) {
-			window.console = api;
-		}
-
-		return api;
-	};
-
 }));
