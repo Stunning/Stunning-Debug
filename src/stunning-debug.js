@@ -89,6 +89,9 @@
 		},
 		getStorage: function() {
 			return storage;
+		},
+		clearStorage: function() {
+			storage = [];
 		}
 	};
 }));
