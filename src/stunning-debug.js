@@ -12,6 +12,7 @@
 }(function() {
 
 	var options = {
+		logging: true,
 		prefix: null,
 		storage: false
 	};
@@ -19,11 +20,16 @@
 	var storage = [];
 	
 	var Send = function(type, args) {
+		// Clean arguments
+		args = CleanArguments( args );
+
 		// Send message to storage
 		Store(type, args);
 
-		// Clean arguments
-		args = CleanArguments( args );
+		// Don't send to console if logging is off
+		if( ! options.logging) {
+			return;
+		}
 
 		// Send message to browser console
 		if(args[1]) {
@@ -92,6 +98,12 @@
 		},
 		clearStorage: function() {
 			storage = [];
+		},
+		on: function() {
+			options.logging = true;
+		},
+		off: function() {
+			options.logging = false;
 		}
 	};
 }));
