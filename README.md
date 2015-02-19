@@ -34,6 +34,10 @@ _Debug.error(arg1, arg2)			// console.error()
 _Debug.set(option|object, value)	// Set single options or multiple with an object.
 _Debug.getStorage()					// Get stored debug history.
 _Debug.clearStorage()				// Clear debug history
+
+// Other methods
+_Debug.on();						// Turn on console logging.
+_Debug.off() 						// Turn off console logging. Storage will still be used if active.
 ```
 
 ## Options
@@ -42,6 +46,7 @@ All options and their defaults.
 
 ```javascript
 {
+	logging: true,		// Console logging, storage will still be used if active.
 	storage: false,		// Storage functionality, turned off by default.
 	prefix: null		// Prefix first argument in logging if it's a string.
 }
